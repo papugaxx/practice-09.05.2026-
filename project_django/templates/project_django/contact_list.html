@@ -2,67 +2,54 @@
 <html lang="uk">
 <head>
     <meta charset="UTF-8">
-    <title>Телефонна книга</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background: #111827;
-            color: white;
-            padding: 30px;
-        }
-
-        h1 {
-            color: #38bdf8;
-        }
-
-        a {
-            color: white;
-            background: #2563eb;
-            padding: 10px 15px;
-            text-decoration: none;
-            border-radius: 8px;
-            display: inline-block;
-            margin-bottom: 20px;
-        }
-
-        .contact {
-            background: #1f2937;
-            padding: 15px;
-            border-radius: 10px;
-            margin-bottom: 15px;
-        }
-
-        .contact h2 {
-            margin: 0 0 10px;
-            color: #facc15;
-        }
-
-        .empty {
-            color: #9ca3af;
-        }
-    </style>
+    <title></title>
 </head>
 <body>
 
-    <h1>Телефонна книга</h1>
+<h1>Телефонна книга</h1>
 
+<p>
     <a href="{% url 'add_contact' %}">Додати контакт</a>
+</p>
 
-    {% if contacts %}
-        {% for contact in contacts %}
-            <div class="contact">
-                <h2>{{ contact.first_name }} {{ contact.last_name }}</h2>
-                <p><b>Email:</b> {{ contact.email }}</p>
-                <p><b>Телефон:</b> {{ contact.phone }}</p>
+<form method="get">
+    <input
+        type="text"
+        name="search"
+        placeholder="Ім'я або прізвище"
+        value="{{ search }}"
+    >
 
-                {% if contact.notes %}
-                    <p><b>Примітки:</b> {{ contact.notes }}</p>
-                {% endif %}
-            </div>
-        {% endfor %}
-    {% else %}
-        <p class="empty">Контактів поки немає.</p>
-    {% endif %}
+    <button type="submit">Пошук</button>
+
+    <a href="{% url 'contact_list' %}">Показати всі</a>
+</form>
+
+<br>
+
+<table border="1" cellpadding="7">
+    <tr>
+        <th>Ім'я</th>
+        <th>Прізвище</th>
+        <th>Email</th>
+        <th>Телефон</th>
+        <th>Примітки</th>
+    </tr>
+
+    {% for contact in contacts %}
+        <tr>
+            <td>{{ contact.first_name }}</td>
+            <td>{{ contact.last_name }}</td>
+            <td>{{ contact.email }}</td>
+            <td>{{ contact.phone }}</td>
+            <td>{{ contact.notes }}</td>
+        </tr>
+    {% empty %}
+        <tr>
+            <td colspan="5">Контактів не знайдено</td>
+        </tr>
+    {% endfor %}
+</table>
 
 </body>
 </html>

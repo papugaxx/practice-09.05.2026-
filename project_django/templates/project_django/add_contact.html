@@ -2,53 +2,7 @@
 <html lang="uk">
 <head>
     <meta charset="UTF-8">
-    <title>Додати контакт</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background: #111827;
-            color: white;
-            padding: 30px;
-        }
-
-        h1 {
-            color: #38bdf8;
-        }
-
-        form {
-            background: #1f2937;
-            padding: 20px;
-            border-radius: 10px;
-            width: 400px;
-        }
-
-        p {
-            display: flex;
-            flex-direction: column;
-        }
-
-        input, textarea {
-            padding: 10px;
-            border-radius: 6px;
-            border: none;
-            margin-top: 5px;
-        }
-
-        button {
-            background: #22c55e;
-            color: white;
-            padding: 10px 15px;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-        }
-
-        a {
-            color: #93c5fd;
-            display: inline-block;
-            margin-top: 20px;
-        }
-    </style>
+    <title></title>
 </head>
 <body>
 
@@ -56,12 +10,15 @@
 
     <form method="post">
         {% csrf_token %}
+
         {{ form.as_p }}
 
         <button type="submit">Зберегти</button>
     </form>
 
-    <a href="{% url 'contact_list' %}">Назад до контактів</a>
+    <p>
+        <a href="{% url 'contact_list' %}">Назад до телефонної книги</a>
+    </p>
 
 </body>
 </html>

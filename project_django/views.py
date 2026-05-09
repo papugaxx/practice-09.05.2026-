@@ -1,13 +1,23 @@
 from django.shortcuts import render, redirect
+from django.db.models import Q
 from .models import Contact
 from .forms import ContactForm
 
 
 def contact_list(request):
+    search = request.GET.get('search', '')
+
     contacts = Contact.objects.all()
 
+    if search:
+        contacts = Contact.objects.filter(
+            Q(first_name__icontains=search) |
+            Q(last_name__icontains=search)
+        )
+
     return render(request, 'project_django/contact_list.html', {
-        'contacts': contacts
+        'contacts': contacts,
+        'search': search
     })
 
 
